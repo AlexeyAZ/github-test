@@ -1,0 +1,7 @@
+@import '../../styles/variables.scss';
+
+.layout {
+  display: flex;
+  padding-top: $header-height;
+  min-height: 100vh;
+}
