@@ -22,7 +22,7 @@ const Header = ({ licenses = [], onSearchInputChange, onLicenseChange = noop } :
       <Container className={styles.container}>
         <span>
           <label htmlFor="licenseSelect">License: </label>
-          <Select id="licenseSelect" options={licenses} onChange={onLicenseChange} />
+          <Select className={styles.select} id="licenseSelect" options={licenses} onChange={onLicenseChange} />
         </span>
         <span>
           <Input placeholder="Search" onChange={onSearchInputChange} />

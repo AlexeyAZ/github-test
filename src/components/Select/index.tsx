@@ -9,12 +9,13 @@ interface OptionAttributes {
 interface SelectProps {
   options: OptionAttributes[],
   id?: string,
+  className?: string,
   onChange: (e: object) => void,
 }
 
-const Select = ({ id, options, onChange } : SelectProps) => {
+const Select = ({ id, options, className = '', onChange } : SelectProps) => {
   return (
-    <select id={id} onChange={onChange}>
+    <select id={id} onChange={onChange} className={className}>
       {options.map(({ value, title }) => (
         <option value={value} key={value}>
           {title}

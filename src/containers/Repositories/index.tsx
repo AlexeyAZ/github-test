@@ -55,16 +55,21 @@ interface License {
 const defaultLicenses = [{ title: 'all', value: 'all' }]
 const date = moment().subtract(30, 'days').format('YYYY-MM-DD')
 const defaultQueryParams = `sort:stars language:javascript created:>${date}`
+const defaultQueryCount = 20
 
 const Repositories = () => {
   const [querySearch, setQuerySearch] = useState('')
   const [license, setLicense] = useState('all')
+
+  const queryLicense = license === 'all' ? '' : `license:${license}`
+
   const { loading: repositoriesLoading, data: repositoriesData, refetch: repositoriesRefetch } = useQuery<RepositoryRefetchVariables>(
     GET_REPOSITORIES,
     {
       notifyOnNetworkStatusChange: true,
       variables: {
-        query: `${querySearch} ${defaultQueryParams} ${license === 'all' ? '' : `license:${license}`}`
+        query: `${querySearch} ${defaultQueryParams} ${queryLicense}`,
+        first: defaultQueryCount,
       }
     }
   )
