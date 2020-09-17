@@ -5,13 +5,10 @@ import client from '../../gql/client'
 
 import Repositories from '../Repositories'
 
-function App() {
-  
-  return (
-    <ApolloProvider client={client}>
-      <Repositories />
-    </ApolloProvider>
-  )
-}
+const App = () => (
+  <ApolloProvider client={client}>
+    <Repositories />
+  </ApolloProvider>
+)
 
 export default App

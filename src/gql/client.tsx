@@ -7,7 +7,7 @@ interface Headers {
 }
 
 const authLink = new ApolloLink((operation, forward) => {
-  operation.setContext(({ headers }: Headers) => ({
+  operation.setContext(({ headers } : Headers) => ({
     headers: {
       Authorization: `Bearer ${process.env.REACT_APP_GITHUB_TOKEN}`,
       ...headers,

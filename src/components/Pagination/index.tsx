@@ -3,7 +3,7 @@ import noop from 'lodash/noop'
 
 import Button from '../Button'
 
-interface PaginationProps {
+interface IPaginationProps {
   hasNextPage: boolean
   onNextButtonClick?: (e: object) => void,
 }
@@ -11,7 +11,7 @@ interface PaginationProps {
 const Pagination = ({
   hasNextPage,
   onNextButtonClick = noop,
-}: PaginationProps) => {
+}: IPaginationProps) => {
   if (hasNextPage) {
     return <Button onClick={onNextButtonClick}>Next</Button>
   }

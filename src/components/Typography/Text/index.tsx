@@ -3,7 +3,7 @@ import cn from 'classnames'
 
 import styles from './style.module.scss'
 
-export interface TextProps {
+export interface ITextProps {
   fontWeight?: string,
   fontSize?: string,
   children: ReactNode,
@@ -11,7 +11,7 @@ export interface TextProps {
   as?: keyof JSX.IntrinsicElements,
 }
 
-const Text = ({ fontWeight = 'normal', fontSize = 's', children, className = '', as = 'p' } : TextProps) => {
+const Text = ({ fontWeight = 'normal', fontSize = 's', children, className = '', as = 'p' } : ITextProps) => {
   const textFontWeight = styles[`font-weight-${fontWeight}`]
   const textFontSize = styles[`font-size-${fontSize}`]
   const Tag = as

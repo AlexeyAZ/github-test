@@ -7,7 +7,7 @@ import { Container } from '../Grid'
 
 import styles from './style.module.scss'
 
-interface HeaderProps {
+interface IHeaderProps {
   licenses?: {
     value: string,
     title: string
@@ -16,7 +16,7 @@ interface HeaderProps {
   onLicenseChange?: (e: object) => void,
 }
 
-const Header = ({ licenses = [], onSearchInputChange, onLicenseChange = noop } : HeaderProps) => {
+const Header = ({ licenses = [], onSearchInputChange, onLicenseChange = noop } : IHeaderProps) => {
   return (
     <div className={styles.header}>
       <Container className={styles.container}>

@@ -11,39 +11,41 @@ import { GET_REPOSITORIES, GET_LICENSES } from './queries'
 
 import styles from './style.module.scss'
 
-interface RepositoryStargazers {
+interface IRepositoryStargazers {
   totalCount: number
 }
 
-interface RepositoryLicenseInfo {
+interface IRepositoryLicenseInfo {
   name: string
 }
 
-interface RepositoryOwner {
+interface IRepositoryOwner {
   login: string,
   url: string,
 }
 
-interface RepositoryPageInfo {
+interface IRepositoryPageInfo {
   hasNextPage: boolean
   hasPreviousPage: boolean,
   startCursor: string,
   endCursor: string,
 }
 
-interface RepositoryFields {
-  pageInfo: RepositoryPageInfo,
+interface IRepositoryFields {
+  pageInfo: IRepositoryPageInfo,
   createdAt: string,
   databaseId: number,
-  stargazers: RepositoryStargazers,
+  stargazers: IRepositoryStargazers,
   description: string,
-  licenseInfo: RepositoryLicenseInfo
+  licenseInfo: IRepositoryLicenseInfo
   name: string,
-  owner: RepositoryOwner,
+  owner: IRepositoryOwner,
   url: string,
 }
 
-interface RepositoryRefetchVariables {
+interface IRepositoryVariables {
+  query: string,
+  first: number,
   after: string,
 }
 
@@ -63,7 +65,7 @@ const Repositories = () => {
 
   const queryLicense = license === 'all' ? '' : `license:${license}`
 
-  const { loading: repositoriesLoading, data: repositoriesData, refetch: repositoriesRefetch } = useQuery<RepositoryRefetchVariables>(
+  const { loading: repositoriesLoading, data: repositoriesData, refetch: repositoriesRefetch } = useQuery<IRepositoryVariables>(
     GET_REPOSITORIES,
     {
       notifyOnNetworkStatusChange: true,
@@ -131,7 +133,7 @@ const Repositories = () => {
             <Text>Repositories not found</Text>
           ) : (
             <div className={styles.repositories}>
-              {repos.map((repo: RepositoryFields) => {
+              {repos.map((repo: IRepositoryFields) => {
                 const id = get(repo, "databaseId");
                 const repoName = get(repo, "name");
                 const repoUrl = get(repo, "url");

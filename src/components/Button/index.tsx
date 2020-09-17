@@ -1,12 +1,11 @@
-import React, { ReactNode } from 'react'
-import noop from 'lodash/noop'
+import React from 'react'
 
-interface ButtonProps {
-  children: ReactNode,
-  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void,
+interface IButtonProps {
+  children: React.ReactNode,
+  onClick: (e: React.MouseEvent<HTMLButtonElement>)  => void,
 }
 
-const Button = ({ onClick = noop, children } : ButtonProps) => {
+const Button = ({ onClick, children } : IButtonProps) => {
   return (
     <button onClick={onClick}>
       {children}

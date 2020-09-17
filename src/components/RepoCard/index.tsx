@@ -5,7 +5,7 @@ import { Title, Text } from '../Typography'
 
 import styles from './style.module.scss'
 
-interface RepoCardProps {
+interface IRepoCardProps {
   repoName: string,
   repoUrl: string,
   ownerName: string,
@@ -25,7 +25,7 @@ const RepoCard = ({
   stars,
   createdAt,
   className = "",
-}: RepoCardProps) => {
+}: IRepoCardProps) => {
   const isLicenseExist = Boolean(license)
   return (
     <div className={cn(styles.repoCard, className)}>
