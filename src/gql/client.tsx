@@ -6,10 +6,12 @@ interface Headers {
   headers: object,
 }
 
+const token = localStorage.getItem('token') || process.env.REACT_APP_GITHUB_TOKEN
+
 const authLink = new ApolloLink((operation, forward) => {
   operation.setContext(({ headers } : Headers) => ({
     headers: {
-      Authorization: `Bearer ${process.env.REACT_APP_GITHUB_TOKEN}`,
+      Authorization: `Bearer ${token}`,
       ...headers,
     },
   }));
