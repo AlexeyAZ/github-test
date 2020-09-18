@@ -2,21 +2,11 @@ import React from 'react'
 import cn from 'classnames'
 
 import { Title, Text } from '../Typography'
+import { IRepoCardProps } from './types'
 
 import styles from './style.module.scss'
 
-interface IRepoCardProps {
-  repoName: string,
-  repoUrl: string,
-  ownerName: string,
-  ownerUrl: string,
-  license: string,
-  stars: number,
-  createdAt: string,
-  className?: string,
-}
-
-const RepoCard = ({
+const RepoCard: React.FC<IRepoCardProps> = ({
   repoName,
   repoUrl,
   ownerName,
@@ -25,7 +15,7 @@ const RepoCard = ({
   stars,
   createdAt,
   className = "",
-}: IRepoCardProps) => {
+}) => {
   const isLicenseExist = Boolean(license)
   return (
     <div className={cn(styles.repoCard, className)}>

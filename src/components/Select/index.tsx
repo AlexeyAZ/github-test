@@ -1,19 +1,8 @@
 import React from 'react'
 
-interface IOptionAttributes {
-  value: string,
-  title: string,
-  selected?: boolean,
-}
+import { ISelectProps } from './types'
 
-interface ISelectProps {
-  options: IOptionAttributes[],
-  id?: string,
-  className?: string,
-  onChange: (e: object) => void,
-}
-
-const Select = ({ id, options, className = '', onChange } : ISelectProps) => {
+const Select: React.FC<ISelectProps> = ({ id, options, className = '', onChange }) => {
   return (
     <select id={id} onChange={onChange} className={className}>
       {options.map(({ value, title }) => (

@@ -1,11 +1,8 @@
 import React from 'react'
 
-interface IButtonProps {
-  children: React.ReactNode,
-  onClick: (e: React.MouseEvent<HTMLButtonElement>)  => void,
-}
+import { IButtonProps } from './types'
 
-const Button = ({ onClick, children } : IButtonProps) => {
+const Button: React.FC<IButtonProps> = ({ onClick, children }) => {
   return (
     <button onClick={onClick}>
       {children}

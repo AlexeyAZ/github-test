@@ -1,4 +1,5 @@
 @import './styles/colors.scss';
+@import './styles//variables.scss';
 
 body {
   background-color: rgba(0,0,0,0.1);
@@ -8,7 +9,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  min-width: 320px;
+  min-width: $body-min-width;
 }
 
 code {

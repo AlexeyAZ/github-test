@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import moment from 'moment'
 
-import { useLazyQuery } from '@apollo/client'
+import { useQuery, useLazyQuery } from '@apollo/client'
 import get from 'lodash/get'
 import debounce from 'lodash/debounce'
 
-import { RepoCard, Container, Pagination, Layout, Header, Text, LoaderContainer } from '../../components'
+import { RepoCard, Container, Pagination, Layout, Header, Text, LoaderContainer, Button } from '../../components'
 
 import { GET_REPOSITORIES, GET_LICENSES } from './queries'
 
@@ -21,15 +21,17 @@ const querySearchDebounceDelay = 1000
 
 const Repositories = () => {
   const [querySearch, setQuerySearch] = useState('')
+  const [prevPageCursor, setPrevPageCursor] = useState(null)
   const [license, setLicense] = useState('all')
 
   const queryLicense = license === 'all' ? '' : `license:${license}`
 
-  const [getRepositories, { loading: repositoriesLoading, data: repositoriesData }] = useLazyQuery<IRepositoryVariables>(
+  const { loading: repositoriesLoading, data: repositoriesData, refetch: repositoriesRefetch } = useQuery<IRepositoryVariables>(
     GET_REPOSITORIES,
     {
       notifyOnNetworkStatusChange: true,
       variables: {
+        query: `${querySearch} ${defaultQueryParams} ${queryLicense}`,
         first: defaultQueryCount,
       }
     }
@@ -42,7 +44,6 @@ const Repositories = () => {
   const repos = get(repositoriesData, 'search.nodes') || []
   const pageInfo = get(repositoriesData, 'search.pageInfo')
   const hasNextPage = get(pageInfo, 'hasNextPage')
-  const hasPreviousPage = get(pageInfo, 'hasPreviousPage')
   const startCursor = get(pageInfo, 'startCursor')
   const endCursor = get(pageInfo, 'endCursor')
 
@@ -64,38 +65,24 @@ const Repositories = () => {
   }, [])
 
   const handleNextButtonClick = useCallback(async (e) => {
-    await getRepositories({
-      variables: {
-        query: `${querySearch} ${defaultQueryParams} ${queryLicense}`,
-        after: endCursor,
-        first: defaultQueryCount,
-        last: null,
-      }
+    await repositoriesRefetch({
+      after: endCursor
     })
-  }, [endCursor, querySearch, queryLicense, getRepositories])
+    setPrevPageCursor(startCursor)
+  }, [endCursor, repositoriesRefetch])
 
-  const handlePreviousButtonClick = useCallback(async (e) => {
-    await getRepositories({
-      variables: {
-        query: `${querySearch} ${defaultQueryParams} ${queryLicense}`,
-        before: startCursor,
-        first: null,
-        last: defaultQueryCount,
-      }
+  const handlePrevButtonClick = useCallback(async (e) => {
+    await repositoriesRefetch({
+      before: prevPageCursor
     })
-  }, [startCursor, querySearch, queryLicense, getRepositories])
+  }, [endCursor, repositoriesRefetch])
+
+  console.log(pageInfo)
+  console.log(prevPageCursor)
 
   useEffect(() => {
     getLicenses()
   }, [getLicenses])
-
-  useEffect(() => {
-    getRepositories({
-      variables: {
-        query: `${querySearch} ${defaultQueryParams} ${queryLicense}`,
-      }
-    })
-  }, [querySearch, queryLicense, getRepositories])
 
   return (
     <Layout>
@@ -139,10 +126,9 @@ const Repositories = () => {
                 })}
               </div>
             )}
+            <Button onClick={handlePrevButtonClick}>Prev</Button>
             <Pagination
-              hasPreviousPage={hasPreviousPage}
               hasNextPage={hasNextPage}
-              onPreviousButtonClick={handlePreviousButtonClick}
               onNextButtonClick={handleNextButtonClick}
             />
           </Container>

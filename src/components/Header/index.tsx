@@ -5,18 +5,11 @@ import Input from '../Input'
 import Select from '../Select'
 import { Container } from '../Grid'
 
+import { IHeaderProps } from './types'
+
 import styles from './style.module.scss'
 
-interface IHeaderProps {
-  licenses?: {
-    value: string,
-    title: string
-  }[],
-  onSearchInputChange: (e: object) => void,
-  onLicenseChange?: (e: object) => void,
-}
-
-const Header = ({ licenses = [], onSearchInputChange, onLicenseChange = noop } : IHeaderProps) => {
+const Header: React.FC<IHeaderProps> = ({ licenses = [], onSearchInputChange, onLicenseChange = noop }) => {
   return (
     <div className={styles.header}>
       <Container className={styles.container}>

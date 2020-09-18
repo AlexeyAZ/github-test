@@ -1,12 +1,8 @@
-import React, { ReactNode } from 'react'
+import React from 'react'
 
 import styles from './style.module.scss'
 
-type ILayoutProps = {
-  children: ReactNode
-}
-
-const Layout = ({ children }: ILayoutProps) => {
+const Layout: React.FC = ({ children }) => {
   return (
     <div className={styles.layout}>
       {children}

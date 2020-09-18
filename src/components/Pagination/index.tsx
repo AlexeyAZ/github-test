@@ -3,19 +3,30 @@ import noop from 'lodash/noop'
 
 import Button from '../Button'
 
-interface IPaginationProps {
-  hasNextPage: boolean
-  onNextButtonClick?: (e: object) => void,
-}
+import { IPaginationProps } from './types'
 
-const Pagination = ({
+const Pagination: React.FC<IPaginationProps> = ({
+  hasPreviousPage,
   hasNextPage,
+  onPreviousButtonClick = noop,
   onNextButtonClick = noop,
-}: IPaginationProps) => {
+}) => {
+  if (hasPreviousPage && hasNextPage) {
+    return (
+      <div>
+        <Button onClick={onPreviousButtonClick}>Previous</Button>
+        {' '}
+        <Button onClick={onNextButtonClick}>Next</Button>
+      </div>
+    )
+  }
+  if (hasPreviousPage) {
+    return <Button onClick={onPreviousButtonClick}>Previous</Button>
+  }
   if (hasNextPage) {
     return <Button onClick={onNextButtonClick}>Next</Button>
   }
-  return null
+  return null;
 }
 
 export default Pagination

@@ -1,8 +1,10 @@
 import React from 'react'
 
-import Text, { ITextProps } from '../Text'
+import Text from '../Text'
 
-const Title = ({ children, className } : ITextProps) => {
+import { ITextProps } from '../types'
+
+const Title: React.FC<ITextProps> = ({ children, className }) => {
   return (
     <Text fontSize="m" fontWeight="medium" className={className}>{children}</Text>
   )

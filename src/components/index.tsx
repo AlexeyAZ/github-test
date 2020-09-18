@@ -6,6 +6,7 @@ import RepoCard from './RepoCard'
 import Loader from './Loader'
 import Button from './Button'
 import Pagination from './Pagination'
+import LoaderContainer from './LoaderContainer'
 
 import { Container } from './Grid'
 import { Text, Title } from './Typography'
@@ -22,4 +23,5 @@ export {
   Title,
   Button,
   Pagination,
+  LoaderContainer,
 }

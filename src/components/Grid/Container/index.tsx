@@ -1,14 +1,11 @@
-import React, { ReactNode } from 'react'
+import React from 'react'
 import cn from 'classnames'
+
+import { IContainerProps } from './types'
 
 import styles from './style.module.scss'
 
-interface IContainerProps {
-  children: ReactNode,
-  className?: string
-}
-
-const Container = ({ children, className = '' }: IContainerProps) => {
+const Container: React.FC<IContainerProps> = ({ children, className = '' }) => {
   return (
     <div className={cn(styles.container, className)}>
       {children}

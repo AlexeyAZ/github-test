@@ -1,9 +1,5 @@
 @import '../../styles/variables.scss';
 
-.loader {
-  
-}
-
 .loaderPic {
   animation: spinner linear infinite 2s;
   border-radius: 50%;
@@ -20,7 +16,6 @@
 @keyframes spinner {
   0% {
     transform: rotate(0deg);
-    
   }
 
   100% {

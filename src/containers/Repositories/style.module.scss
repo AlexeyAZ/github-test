@@ -29,15 +29,3 @@
   flex: 1;
   width: 100%;
 }
-.loaderWrap {
-  composes: container;
-  background-color: rgba(0,0,0,0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: $header-height;
-  left: 0;
-  height: calc(100vh - #{$header-height});
-  width: 100%;
-}

@@ -9,6 +9,8 @@
   left: 0;
   height: $header-height;
   width: 100%;
+  min-width: $body-min-width;
+  z-index: $header-z-index;
 }
 
 .container {
