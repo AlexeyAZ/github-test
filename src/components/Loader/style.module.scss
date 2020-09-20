@@ -1,0 +1,24 @@
+@import '../../styles/variables.scss';
+
+.loaderPic {
+  animation: spinner linear infinite 2s;
+  border-radius: 50%;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  border-left: 2px solid transparent;
+  border-right: 2px solid transparent;
+  margin-left: auto;
+  margin-right: auto;
+  height: 40px;
+  width: 40px;
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

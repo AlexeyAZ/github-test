@@ -1,0 +1,19 @@
+@import '../../styles/variables.scss';
+
+.repoCard {
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  padding: 20px;
+}
+.titleWrap {
+  overflow: hidden;
+  width: 100%;
+}
+.title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.titleLink {
+  text-decoration: none;
+}
