@@ -1,16 +1,17 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useRef } from 'react'
 import noop from 'lodash/noop'
+import get from 'lodash/get'
 
 import { InputProps } from './types'
 
 const Input: React.FC<InputProps> = ({ onChange = noop, onKeyPress = noop, className = '', placeholder = '' }) => {
-  const [value, setValue] = useState('')
-  const handleInputChange = useCallback((e) => {
-    setValue(e.target.value)
-    onChange(e.target.value)
+  const inputEl = useRef(null)
+  const handleInputChange = useCallback(() => {
+    const value = get(inputEl, 'current.value')
+    onChange(value)
   }, [onChange])
   return (
-    <input onChange={handleInputChange} onKeyPress={onKeyPress} value={value} className={className} placeholder={placeholder} />
+    <input ref={inputEl} onChange={handleInputChange} onKeyPress={onKeyPress} className={className} placeholder={placeholder} />
   )
 }
 
